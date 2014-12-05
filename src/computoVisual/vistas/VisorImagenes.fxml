@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="960.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="computoVisual.controladores.VisorImagenesController">
+  <children>
+    <SplitPane dividerPositions="0.5020876826722338" focusTraversable="true" prefHeight="375.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+      <items>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <children>
+            <ScrollPane fx:id="imagenOriginal" content="$null" prefHeight="373.0" prefWidth="298.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+          </children>
+        </AnchorPane>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <children>
+            <ScrollPane fx:id="imagenRender" content="$null" prefHeight="373.0" prefWidth="294.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+          </children>
+        </AnchorPane>
+      </items>
+    </SplitPane>
+    <MenuBar minHeight="25.0" prefHeight="25.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <menus>
+        <Menu mnemonicParsing="false" text="Archivo">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#abrirImagen" text="abrir">
+              <accelerator>
+                <KeyCodeCombination alt="UP" code="O" control="ANY" meta="UP" shift="UP" shortcut="UP" />
+              </accelerator>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false" onAction="#guardarImagen" text="guardar">
+              <accelerator>
+                <KeyCodeCombination alt="UP" code="G" control="ANY" meta="UP" shift="UP" shortcut="UP" />
+              </accelerator>
+            </MenuItem>
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Filtros">
+          <items>
+            <Menu mnemonicParsing="false" text="Canales">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#mostrarCanalRojo" text="rojo" />
+                <MenuItem mnemonicParsing="false" onAction="#mostrarCanalVerde" text="verde" />
+                <MenuItem mnemonicParsing="false" onAction="#mostrarCanalAzul" text="azul" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Color">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#mostrarEscalaGris" text="Escala de grises" />
+                <MenuItem mnemonicParsing="false" onAction="#mostrarBlancoNegro" text="Blanco y Negro" />
+                <MenuItem mnemonicParsing="false" onAction="#mostrarInverso" text="Inverso" />
+                <MenuItem mnemonicParsing="false" onAction="#inversoGris" text="Inverso Gris" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Otros">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#blending" text="Blending" />
+                <MenuItem mnemonicParsing="false" onAction="#aumentarBrillo" text="Brillo" />
+                <MenuItem mnemonicParsing="false" onAction="#desenfoque" text="Desenfoque" />
+                <MenuItem mnemonicParsing="false" onAction="#gaussian" text="Desenfoque Gausiano" />
+                <MenuItem mnemonicParsing="false" onAction="#highPass" text="Paso Alto" />
+                <MenuItem mnemonicParsing="false" onAction="#convolucion" text="Convolucion" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Especiales">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#imagenHibrida" text="Imagenes Hibridas" />
+                <MenuItem mnemonicParsing="false" onAction="#morphing" text="morphing" />
+              </items>
+            </Menu>
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <Pane fx:id="menus" prefHeight="71.0" prefWidth="960.0" styleClass="barraHerramientas" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <children>
+        <HBox id="HBox" alignment="CENTER" layoutX="14.0" layoutY="9.0" spacing="5.0">
+          <children>
+            <HBox id="HBox" alignment="CENTER" spacing="5.0">
+              <children>
+                <CheckBox fx:id="rojo" mnemonicParsing="false" onAction="#cambioCanal" text="Rojo">
+                  <textFill>
+                    <Color blue="0.875" green="0.875" red="0.875" fx:id="x1" />
+                  </textFill>
+                </CheckBox>
+                <CheckBox id="rojo" fx:id="verde" mnemonicParsing="false" onAction="#cambioCanal" prefWidth="69.99990844726562" text="Verde" textFill="$x1" />
+                <CheckBox fx:id="azul" mnemonicParsing="false" onAction="#cambioCanal" text="Azul" textFill="$x1" />
+              </children>
+            </HBox>
+            <HBox id="HBox" alignment="CENTER" prefWidth="287.0" spacing="5.0">
+              <children>
+                <Label id="masterSlider" fx:id="tituloSlider" text="Brillo" />
+                <Slider fx:id="masterSlider" blockIncrement="5.0" min="10.0" prefWidth="116.0" showTickMarks="true" snapToTicks="true" value="50.0" />
+                <Button fx:id="ok" mnemonicParsing="false" prefWidth="83.0" text="cambiar" />
+              </children>
+            </HBox>
+            <HBox id="HBox" alignment="CENTER" prefWidth="403.0" spacing="5.0">
+              <children>
+                <ProgressBar fx:id="barra" prefWidth="154.0" progress="-0.26" visible="false">
+                  <effect>
+                    <SepiaTone level="0.6" />
+                  </effect>
+                </ProgressBar>
+                <Label text="Ancho" />
+                <TextField id="alto" fx:id="ancho" prefWidth="36.0" />
+                <Label text="Alto" />
+                <TextField fx:id="alto" prefWidth="36.0" />
+                <Button id="ok" minWidth="36.0" mnemonicParsing="false" onAction="#desenfoque" prefWidth="70.0" text="ver" />
+              </children>
+            </HBox>
+          </children>
+        </HBox>
+        <HBox id="HBox" alignment="CENTER" layoutX="4.0" layoutY="42.0" prefWidth="287.0" spacing="5.0">
+          <children>
+            <Label id="masterSlider" text="paso bajo" />
+            <Slider id="masterSlider" fx:id="s1" blockIncrement="3.0" max="50.0" min="5.0" prefWidth="116.0" showTickMarks="true" snapToTicks="true" value="7.0" />
+          </children>
+        </HBox>
+        <HBox id="HBox" alignment="CENTER" layoutX="251.0" layoutY="38.0" prefWidth="287.0" spacing="5.0">
+          <children>
+            <Label id="masterSlider" text="paso alto" />
+            <Slider id="masterSlider" fx:id="s2" blockIncrement="5.0" max="50.0" min="5.0" prefWidth="116.0" showTickMarks="true" snapToTicks="true" value="7.0" />
+            <Button id="ok" mnemonicParsing="false" onAction="#imagenHibrida" prefWidth="83.0" text="ok" />
+          </children>
+        </HBox>
+      </children>
+    </Pane>
+  </children>
+  <stylesheets>
+    <URL value="@visorimagenes.css" />
+  </stylesheets>
+</AnchorPane>
